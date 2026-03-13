@@ -25,7 +25,6 @@ O **VagaVision** é um projeto de inovação tecnologica proposto como solução
 
 ## 🏗️ Estrutura do Repositório
 * `/docs`: Documentação do projeto e levantamento de requisitos.
-* `/research`: Pesquisas sobre modelos preditivos e tecnologias candidatas.
 * `/prototype`: Primeiros esboços e provas de conceito (PoC).
 
 
