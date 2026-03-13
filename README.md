@@ -6,8 +6,7 @@
 
 > **Projeto de Estacionamento Preditivo e Gestão de Tráfego Urbano**
 
-O **VagaVision** é um projeto de inovação tecnologica proposto como solução aos desafios apresentados pela empresa parceira  
-**[Dsin](https://www.dsin.com.br/)**, Nosso projeto consiste em informar aos usuarios os melhores horários e localidades para estacionarem seus veiculos, assim melhorando o cotidiano dos usuarios e o trafego urbano. 
+O VagaVision é um projeto de inovação tecnológica proposto como solução para os desafios apresentados pela empresa parceira [Dsin](https://www.dsin.com.br). Nosso projeto consiste em informar aos usuários os melhores horários e localidades para estacionarem seus veículos, melhorando assim o cotidiano dos usuários e o tráfego urbano. 
 
 ---
 
@@ -42,4 +41,5 @@ Desenvolvido como projeto acadêmico por:
 ---
 <p align="center">
   📅 2026 | Projeto Acadêmico <b>UNIMAR</b> em colaboração com <b>Dsin</b>
+
 </p>
