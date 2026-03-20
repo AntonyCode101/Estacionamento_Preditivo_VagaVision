@@ -30,7 +30,7 @@ O VagaVision é um projeto de inovação tecnológica proposto como solução pa
 
 ## 👥 Contribuição e Desenvolvimento
 Desenvolvido como projeto acadêmico por:
-* **Ana Julia Chiezi** - *Desenvolvedor* - [GitHub](https://github.com/seu-usuario)
+* **Ana Julia Chiezi** - *Desenvolvedor* - [GitHub](https://github.com/Phryhi)
 * **Antony Miguel Nogueira Pereira** - *Desenvolvedor* - [GitHub](https://github.com/AntonyCode101)
 * **Camila Pereira Mattos da Rocha** - *Desenvolvedor* - [GitHub](https://github.com/seu-usuario)
 * **Rafael Willian Braga Alves** - *Desenvolvedor* - [GitHub](https://github.com/seu-usuario)
