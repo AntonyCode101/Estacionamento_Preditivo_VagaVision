@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
+    <form action="" method="post">
+            <label for="nomeForm">Nome:</label>
+            <input type="text" name="nomeForm" id="nomeForm" placeholder="Digite seu nome">
+            <label for="sobrenomeForm">Sobrenome:</label>
+            <input type="text" name="sobrenomeForm" id="sobrenomeForm" placeholder="Digite seu sobrenome">
+            <label for="emailForm">E-mail:</label>
+            <input type="email" name="emailForm" id="emailForm" placeholder="Digite seu e-mail">
+            <label for="senhaForm">Senha:</label>
+            <input type="password" name="senhaForm" id="senhaForm" placeholder="Digite sua senha">
 
+            <div class="actions">
+                <button type="submit" href="/paginaprincipal" class="btn">Cadastrar</button>
+                <a href="/" class="btn secondary">Voltar</a>
+            </div>
+        </form>
 </body>
 </html>

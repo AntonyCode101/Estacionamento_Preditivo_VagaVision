@@ -1,0 +1,12 @@
+body {
+    padding: 0;
+    margin: 0;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+html, body, #map {
+    height: 100%;
+    width: 100vw;
+}
