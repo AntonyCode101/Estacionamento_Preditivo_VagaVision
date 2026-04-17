@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/style.css">
-<<<<<<< HEAD
     <title>Login</title>
     <style>
         .conteudo, p {
@@ -12,8 +11,11 @@
         }
     </style>
 </head>
+    {% include "sweetalerts.html" %}
+    <title>Title</title>
+</head>
 <body>
-    <!--{% include "sweetalerts.html" %}  #não sei oq é -->
+    {% include "sweetalerts.html" %}
     <main>
         <div class="conteudo">
             <h1>Login</h1>
@@ -30,21 +32,5 @@
                 </form>
         </div>
     </main>
-=======
-    <title>Title</title>
-</head>
-<body>
-    {% include "sweetalerts.html" %}
-    <h1>Login</h1>
-    <form action="" method="post">
-            <input type="email" id="emailForm" name="emailForm" placeholder="E-mail">
-            <input type="password" id="senhaForm" name="senhaForm" placeholder="Senha">
-
-            <div class="actions">
-                <button type="submit" href="/paginaprincipal" class="btn">Entrar</button>
-                <a href="/cadastro" class="btn secondary">Cadastrar-se</a>
-            </div>
-        </form>
->>>>>>> a346b30815086666df4e438da296629e1e509376
 </body>
 </html>
