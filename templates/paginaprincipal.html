@@ -2,74 +2,58 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <title>Mapa com Busca</title>
 </head>
 <body>
-    {% include "sweetalerts.html" %}
-    <p>pagina principal</p>
-    <form action="" method="POST">
-        <label for="search"></label>
-        <input type="search" name="search" id="search">
-        <input type="submit" placeholder="enviar">
+    <form id="formBusca">
+        <input type="search" id="search" placeholder="Buscar local..." required>
+        <button type="submit">Buscar</button>
     </form>
-     <div id="map"></div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        var map = L.map('map').setView([-22.2139, -49.9458], 14);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+        var marcadorBusca;
+        document.getElementById("formBusca").addEventListener("submit", function(e){
+            e.preventDefault();
+
+            var query = document.getElementById("search").value;
+
+            if (!query) return;
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+
+                    console.log(data);
+
+                    if (!data || data.length === 0) {
+                        alert("Local não encontrado");
+                        return;
+                    }
+
+                    var lat = parseFloat(data[0].lat);
+                    var lon = parseFloat(data[0].lon);
+                    if (marcadorBusca) {
+                        map.removeLayer(marcadorBusca);
+                    }
+                    marcadorBusca = L.marker([lat, lon]).addTo(map)
+                        .bindPopup(data[0].display_name)
+                        .openPopup();
+                    map.setView([lat, lon], 16);
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Erro ao buscar localização");
+                });
+        });
+    </script>
 </body>
 </html>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script>
-    var map = L.map('map').setView([-22.2139, -49.9458], 14);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    L.Control.geocoder({
-        defaultMarkGeocode: true
-    }).on('markgeocode', function(e) {
-        var bbox = e.geocode.bbox;
-        var poly = L.polygon([
-            bbox.getSouthEast(),
-            bbox.getNorthEast(),
-            bbox.getNorthWest(),
-            bbox.getSouthWest()
-        ]).addTo(map);
-
-    map.fitBounds(poly.getBounds());
-    }).addTo(map);
-    /*var marker1 = L.marker([-22.2139, -49.9458], {
-        color: 'red',
-        fillColor: '#f03'
-    }).addTo(map);
-    var circle = L.circle([-22.7450, -50.3900], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
-
-    marker1.bindPopup("Você está aqui").openPopup();
-    var popup = L.popup({
-        autoPan: false
-    });
-
-    function onCircleClick(){
-        popup
-            .setLatLng(circle.latlng)
-            .setContent("Melhor cidade da região!")
-            .openOn(map);
-    }
-    circle.on('click', onCircleClick);
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("Posição: " + e.latlng.toString())
-            .openOn(map);
-    }
-
-    map.on('click', onMapClick);*/
-</script>
