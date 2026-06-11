@@ -1,4 +1,43 @@
 from datetime import datetime
+from models import HistoricoOcupacao, Vaga
+from math import sqrt
+
+
+def vagas_proximas(lat, lon, raio=0.005):
+
+    vagas = Vaga.query.all()
+
+    resultado = []
+
+    for vaga in vagas:
+
+        distancia = sqrt(
+            (vaga.latitude - lat) ** 2 +
+            (vaga.longitude - lon) ** 2
+        )
+
+        if distancia <= raio:
+
+            resultado.append(vaga)
+
+    return resultado
+
+def obter_historico(vaga_id):
+
+    registros = HistoricoOcupacao.query.filter_by(
+        vaga_id=vaga_id
+    ).all()
+
+    historico = []
+
+    for registro in registros:
+
+        historico.append({
+            "status": registro.status,
+            "data_hora": registro.data_hora
+        })
+
+    return historico
 
 
 def calcular_probabilidade_vaga(vaga_id, data_consulta, historico):
@@ -53,29 +92,3 @@ def calcular_probabilidade_vaga(vaga_id, data_consulta, historico):
         "status_previsto": status_previsto,
         "analisados": total_registros
     }
-
-
-# EXEMPLO DE USO
-
-historico_exemplo = [
-    {
-        "status": "LIVRE",
-        "data_hora": datetime(2026, 5, 20, 8, 0)
-    },
-    {
-        "status": "OCUPADA",
-        "data_hora": datetime(2026, 5, 20, 9, 0)
-    },
-    {
-        "status": "LIVRE",
-        "data_hora": datetime(2026, 5, 27, 8, 30)
-    }
-]
-
-resultado = calcular_probabilidade_vaga(
-    vaga_id=1,
-    data_consulta=datetime.now(),
-    historico=historico_exemplo
-)
-
-print(resultado)

@@ -1,18 +1,20 @@
 from flask import Flask
 from db import db
-from config.config import SECRET_KEY, DATABASE
+from config.config import SECRET_KEY, DATABASE, MYSQL_DATABASE
 from flask_login import LoginManager
 from controllers.homeController import HomeController
 from controllers.cadastroController import CadastroController
 from controllers.loginController import LoginController
 from controllers.principalController import PrincipalController
 
-
 def create_app():
     app = Flask(__name__)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
-    app.config['SQLALCHEMY_TRACE_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_BINDS'] = {
+        'vagavision': MYSQL_DATABASE
+    }
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 300
     app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}
     app.secret_key = SECRET_KEY

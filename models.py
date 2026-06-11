@@ -14,11 +14,35 @@ class Usuario(UserMixin, db.Model):
     def get_id(self):
         return str(self.id_usuario)
 
-class Vaga(db.Model):
-    __tablename__ = 'vagas'
+class Rua(db.Model):
+    __bind_key__ = "vagavision"
+    __tablename__ = "ruas"
 
-    id_vaga = db.Column(db.Integer, primary_key=True)
-    id_local = db.Column(db.Integer, db.ForeignKey('localizacao.id_local'))
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(255))
+    tipo = db.Column(db.String(50))
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    bairro_id = db.Column(db.Integer)
+
+class Vaga(db.Model):
+    __bind_key__ = "vagavision"
+    __tablename__ = "vagas"
+
+    id = db.Column(db.Integer, primary_key=True)
+    numero = db.Column(db.Integer)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    rua_id = db.Column(db.Integer)
+
+class HistoricoOcupacao(db.Model):
+    __bind_key__ = "vagavision"
+    __tablename__ = "historico_ocupacao"
+
+    id = db.Column(db.Integer, primary_key=True)
+    vaga_id = db.Column(db.Integer)
+    status = db.Column(db.String(20))
+    data_hora = db.Column(db.DateTime)
 
 class Localizacao(db.Model):
     __tablename__ = 'localizacao'
@@ -41,6 +65,6 @@ class Previsao(db.Model):
     __tablename__ = 'previsao'
 
     id_previsao = db.Column(db.Integer, primary_key=True)
-    id_vaga = db.Column(db.Integer, db.ForeignKey('vagas.id_vaga'))
+    id_vaga = db.Column(db.Integer, db.ForeignKey('vagas.id'))
     data = db.Column(db.DateTime, unique=False, nullable=False)
     hora = db.Column(db.Time, unique=False, nullable=False)
