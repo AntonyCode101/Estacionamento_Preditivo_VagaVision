@@ -4,12 +4,20 @@ from math import sqrt
 
 
 def vagas_proximas(lat, lon, raio=0.005):
-
     vagas = Vaga.query.all()
 
     resultado = []
 
     for vaga in vagas:
+        print(
+            vaga.id,
+            vaga.latitude,
+            vaga.longitude
+        )
+
+        if vaga.latitude is None or vaga.longitude is None:
+            print(f"Vaga {vaga.id} sem coordenadas")
+            continue
 
         distancia = sqrt(
             (vaga.latitude - lat) ** 2 +
