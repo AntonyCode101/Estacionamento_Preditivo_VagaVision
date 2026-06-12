@@ -24,8 +24,9 @@ class LoginController:
         if request.method == 'GET':
             return render_template('login.html')
 
-        email = request.form['emailForm']
-        senha = request.form['senhaForm']
+        nome = request.form.get('nomeForm')
+        email = request.form.get('emailForm')
+        senha = request.form.get('senhaForm')
 
         user = Usuario.query.filter_by(email=email, senha=self.hash(senha)).first()
 

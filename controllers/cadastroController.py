@@ -19,10 +19,13 @@ class CadastroController:
         if request.method == 'GET':
             return render_template('cadastro.html')
 
-        nome = request.form['nomeForm']
-        sobrenome = request.form['sobrenomeForm']
-        email = request.form['emailForm'].strip().lower()
-        senha = request.form['senhaForm']
+        nome = request.form.get('nomeForm')
+        sobrenome = request.form.get('sobrenomeForm')
+        email = request.form.get('emailForm')
+        senha = request.form.get('senhaForm')
+
+        print("Método:", request.method)
+        print("Formulário:", request.form)
 
         if not all([nome, sobrenome, email, senha]):
             return "preencha todos os campos"

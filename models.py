@@ -8,8 +8,8 @@ class Usuario(UserMixin, db.Model):
     id_usuario = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(30), unique=False, nullable=False)
     sobrenome = db.Column(db.String(30), unique=False, nullable=False)
-    email = db.Column(db.String(60), unique=True, nullable=False)
-    senha = db.Column(db.String(255), unique=True, nullable=False)
+    email = db.Column(db.String(60), unique=False,  nullable=False)
+    senha = db.Column(db.String(255), unique=False, nullable=False)
 
     def get_id(self):
         return str(self.id_usuario)
@@ -62,6 +62,7 @@ class Consulta(db.Model):
 
 
 class Previsao(db.Model):
+    __bind_key__ = "vagavision"
     __tablename__ = 'previsao'
 
     id_previsao = db.Column(db.Integer, primary_key=True)
