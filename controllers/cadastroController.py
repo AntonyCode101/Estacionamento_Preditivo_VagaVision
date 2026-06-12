@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for, redirect
 from flask_login import login_user
 import hashlib
 from models import Usuario
@@ -21,12 +21,12 @@ class CadastroController:
 
         nome = request.form['nomeForm']
         sobrenome = request.form['sobrenomeForm']
-        email = request.form['emailForm']
+        email = request.form['emailForm'].strip().lower()
         senha = request.form['senhaForm']
 
         if not all([nome, sobrenome, email, senha]):
             return "preencha todos os campos"
-        elif int(senha) < 5:
+        elif len(senha) < 5:
             return "senha inválida, mínimo de 5 caracteres"
         else:
             novo_user = Usuario(nome=nome, sobrenome=sobrenome, email=email, senha=self.hash(senha))
@@ -34,4 +34,4 @@ class CadastroController:
             db.session.add(novo_user)
             db.session.commit()
             login_user(novo_user)
-            return render_template('login.html')
+            return redirect(url_for('paginaprincipal.principal'))
