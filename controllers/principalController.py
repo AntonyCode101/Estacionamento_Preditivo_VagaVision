@@ -10,6 +10,7 @@ class PrincipalController:
 
     def _add_rotas(self):
         self.blueprint.add_url_rule('/', view_func=self.principal, methods=['GET', 'POST'])
+        self.blueprint.add_url_rule('/buscar', view_func=self.buscar, methods=['POST'])
 
     @login_required
     def principal(self):
